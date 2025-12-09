@@ -17,9 +17,6 @@ programming_language_version: 11
 content:
   - Coffee Machine Simulator with Java
 additional_files:
-  - name: build.gradle
-    visible: true
-  - name: settings.gradle
-    visible: true
+  - name: gradle/wrapper/gradle-wrapper.properties
 mode: Study
 yaml_version: 5

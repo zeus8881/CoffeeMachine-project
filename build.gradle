@@ -25,11 +25,16 @@ subprojects {
     repositories {
         mavenCentral()
         maven { url "https://packages.jetbrains.team/maven/p/hyperskill-hs-test/maven" }
-		maven { url "https://jitpack.io" }
+        maven { url "https://jitpack.io" }
     }
 
     dependencies {
         testImplementation 'com.github.hyperskill:hs-test:release-SNAPSHOT'
+
+        compileOnly 'org.projectlombok:lombok:1.18.30'
+        annotationProcessor 'org.projectlombok:lombok:1.18.30'
+        testCompileOnly 'org.projectlombok:lombok:1.18.30'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
     }
 
     configurations.all {
@@ -55,6 +60,9 @@ subprojects {
 project(':util') {
     dependencies {
         implementation 'com.github.hyperskill:hs-test:release-SNAPSHOT'
+
+        compileOnly 'org.projectlombok:lombok:1.18.30'
+        annotationProcessor 'org.projectlombok:lombok:1.18.30'
     }
 }
 

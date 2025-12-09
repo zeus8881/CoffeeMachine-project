@@ -6,6 +6,12 @@ files:
   - name: test/CoffeeMachineTest.java
     visible: false
     learner_created: false
+  - name: src/machine/.gitignore
+    visible: true
+    learner_created: true
 feedback_link: https://hyperskill.org/projects/33/stages/175/implement#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Tue, 09 Dec 2025 08:30:51 UTC"
+record: 1

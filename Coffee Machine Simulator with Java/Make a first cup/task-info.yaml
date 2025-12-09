@@ -6,9 +6,6 @@ files:
   - name: test/CoffeeMachineTest.java
     visible: false
     learner_created: false
-  - name: src/machine/.gitignore
-    visible: true
-    learner_created: true
 feedback_link: https://hyperskill.org/projects/33/stages/175/implement#comment
 status: Solved
 feedback:

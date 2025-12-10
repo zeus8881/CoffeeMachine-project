@@ -5,8 +5,109 @@ import lombok.Data;
 
 import java.util.Scanner;
 
+@Data
+@AllArgsConstructor
 public class CoffeeMachine {
-    public static void main(String[] args) {
+    private int water;
+    private int milk;
+    private int coffeeBeans;
+    private int cups;
+    private double money;
+    private int cupsSinceLastClean;
+
+    public static void getStateOfCoffee(CoffeeMachine coffeeMachine) {
+        System.out.println("The coffee machine has: ");
+        System.out.println(coffeeMachine.getWater() + " ml of water\n");
+        System.out.println(coffeeMachine.getMilk() + " ml of milk    \n");
+        System.out.println(coffeeMachine.getCoffeeBeans() + " g of coffee beans\n");
+        System.out.println(coffeeMachine.getCups() + " disposable cups\n");
+        System.out.println(coffeeMachine.getMoney() + "$ of money\n");
+    }
+
+    public  void buy(CoffeeMachine coffeeMachines) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
+        String choice = sc.next();
+
+        switch (choice) {
+
+            case "1":
+                if (coffeeMachines.getWater() >= 250 && coffeeMachines.getCoffeeBeans() >= 16) {
+                    coffeeMachines.water -= 250;
+                    coffeeMachines.cups -= 1;
+                    coffeeMachines.money += 4.0;
+                    coffeeMachines.setCupsSinceLastClean(coffeeMachines.getCupsSinceLastClean() + 1);
+
+                    getStateOfCoffee(coffeeMachines);
+                    break;
+                }
+
+            case "2":
+                if (coffeeMachines.getWater() >= 350 && coffeeMachines.getMilk() >= 75 && coffeeMachines.getCoffeeBeans() >= 20) {
+                    coffeeMachines.water -= 350;
+                    coffeeMachines.milk -= 75;
+                    coffeeMachines.coffeeBeans -= 20;
+                    coffeeMachines.cups -= 1;
+                    coffeeMachines.money += 7.0;
+                    coffeeMachines.setCupsSinceLastClean(coffeeMachines.getCupsSinceLastClean() + 1);
+
+                    getStateOfCoffee(coffeeMachines);
+                    break;
+                }
+
+            case "3":
+                if (coffeeMachines.getWater() >= 200 && coffeeMachines.getMilk() >= 100 && coffeeMachines.getCoffeeBeans() >= 12) {
+                    coffeeMachines.water -= 200;
+                    coffeeMachines.milk -= 100;
+                    coffeeMachines.coffeeBeans -= 12;
+                    coffeeMachines.cups -= 1;
+                    coffeeMachines.money += 6.0;
+                    coffeeMachines.setCupsSinceLastClean(coffeeMachines.getCupsSinceLastClean() + 1);
+
+                    getStateOfCoffee(coffeeMachines);
+                    break;
+                }
+        }
+    }
+
+    public  void fill(CoffeeMachine coffeeMachines) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Write how many ml of water you want to add: ");
+        coffeeMachines.water += sc.nextInt();
+
+        System.out.println("Write how many ml of milk you want to add: ");
+        coffeeMachines.milk += sc.nextInt();
+
+        System.out.println("Write how many grams of coffee beans you want to add: ");
+        coffeeMachines.coffeeBeans += sc.nextInt();
+
+        System.out.println("Write how many disposable cups you want to add: ");
+        coffeeMachines.cups += sc.nextInt();
+
+        getStateOfCoffee(coffeeMachines);
+    }
+
+    public  void take(CoffeeMachine coffeeMachine) {
+        System.out.println("I gave you $" + coffeeMachine.money);
+        coffeeMachine.money = 0.0;
+
+        getStateOfCoffee(coffeeMachine);
+    }
+
+    public  void remaining(CoffeeMachine coffeeMachine) {
+        getStateOfCoffee(coffeeMachine);
+    }
+
+    public  void clean(CoffeeMachine coffeeMachine) {
+        if (coffeeMachine.cupsSinceLastClean == 0) {
+            coffeeMachine.setCupsSinceLastClean(0);
+        } else {
+            coffeeMachine.setCupsSinceLastClean(coffeeMachine.getCupsSinceLastClean() + 1);
+        }
+    }
+
+    public  void startMakeCoffee() {
         System.out.println("Starting to make a coffee");
         System.out.println("Grinding coffee beans");
         System.out.println("Boiling water");
@@ -14,7 +115,9 @@ public class CoffeeMachine {
         System.out.println("Pouring coffee into the cup");
         System.out.println("Pouring some milk into the cup");
         System.out.println("Coffee is ready!");
+    }
 
+    public  void resourceCalculation() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Write how many cups of coffee you will need: ");
         int cups = sc.nextInt();
@@ -24,51 +127,7 @@ public class CoffeeMachine {
         int coffeeBeans = 15 * cups;
 
         System.out.println("For " + cups + " of coffee you will need: \n" + water + " ml of water \n" + milk + " ml of milk \n" + coffeeBeans + " g of coffee beans.");
-
-
-        var coffee = new Coffee(water, milk, coffeeBeans);
-        checkCoffee(
-                coffee
-        );
-
-    }
-
-    public static void checkCoffee(Coffee coffee) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Write how many ml of water the coffee machine has: ");
-        int water = sc.nextInt();
-        System.out.println("Write how many ml of milk the coffee machine has: ");
-        int milk = sc.nextInt();
-        System.out.println("Write how many grams of coffee beans the coffee machine has: ");
-        int grams = sc.nextInt();
-        System.out.println("Write how many cups of coffee you will need: ");
-        int cups = sc.nextInt();
-
-        final int WATER = 200;
-        final int MILK = 50;
-        final int COFFEEBEANS = 15;
-
-        int maxCupsByWater = water / WATER;
-        int maxMilkByMilk = milk / MILK;
-        int maxCoffeeBeans = grams / COFFEEBEANS;
-
-        int maxCups = Math.min(maxCupsByWater, Math.min(maxMilkByMilk, maxCoffeeBeans));
-
-        if (maxCups == cups) {
-            System.out.println("Yes, I can make that amount of coffee");
-        } else if (maxCups > cups) {
-            System.out.println("Yes, I can make that amount of coffee (and even " + (maxCups - cups) + " more than that)");
-        } else {
-            System.out.println("No, I can make only " + maxCups + " cup(s) of coffee");
-        }
     }
 }
 
-@Data
-@AllArgsConstructor
-class Coffee {
-    private int water;
-    private int milk;
-    private int coffeeBeans;
 
-}

@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class CoffeeMachine {
     public static void main(String[] args) {
+        // 1 //
         System.out.println("Starting to make a coffee");
         System.out.println("Grinding coffee beans");
         System.out.println("Boiling water");
@@ -15,6 +16,7 @@ public class CoffeeMachine {
         System.out.println("Pouring some milk into the cup");
         System.out.println("Coffee is ready!");
 
+        // 2 //
         Scanner sc = new Scanner(System.in);
         System.out.println("Write how many cups of coffee you will need: ");
         int cups = sc.nextInt();
@@ -26,11 +28,11 @@ public class CoffeeMachine {
         System.out.println("For " + cups + " of coffee you will need: \n" + water + " ml of water \n" + milk + " ml of milk \n" + coffeeBeans + " g of coffee beans.");
 
 
+        // 3 //
         var coffee = new Coffee(water, milk, coffeeBeans);
         checkCoffee(
                 coffee
         );
-
     }
 
     public static void checkCoffee(Coffee coffee) {
@@ -70,5 +72,70 @@ class Coffee {
     private int water;
     private int milk;
     private int coffeeBeans;
+}
 
+// 4 //
+
+@Data
+class CoffeeMachines {
+    private int water;
+    private int milk;
+    private int coffeeBeans;
+    private int plasticCups;
+    private double money;
+
+
+    public CoffeeMachines() {
+        this.water = 400;
+        this.milk = 540;
+        this.coffeeBeans = 120;
+        this.plasticCups = 9;
+        this.money = 550.0;
+    }
+
+    public void getStateCoffeeMachines(int water, int milk, int coffeeBeans, int plasticCups, double money) {
+        System.out.println("The coffee machine has: ");
+        System.out.println(water + " ml of water\n");
+        System.out.println(milk + " ml of milk\n");
+        System.out.println(coffeeBeans + " g of coffee beans\n");
+        System.out.println(plasticCups + " disposable cups");
+        System.out.println(money + "$ of money");
+
+    }
+
+    public void whatWillTheBuyerChoose(CoffeeMachines coffeeMachines) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Write action (buy, fill, take): ");
+        String action = sc.next();
+        switch (action) {
+            case "buy" -> {
+                System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
+                int choice = sc.nextInt();
+                switch (choice) {
+                    case 1:
+                        if (coffeeMachines.water >= 250 && coffeeMachines.coffeeBeans >= 16) {
+                            int waterInMachine = coffeeMachines.water -= 250;
+                            int milkInMachine = coffeeMachines.milk;
+                            int plasticCups = coffeeMachines.plasticCups -= 1;
+                            double money = coffeeMachines.money += 4.0;
+                            getStateCoffeeMachines(waterInMachine, milkInMachine, plasticCups, coffeeMachines.getCoffeeBeans(), money);
+                        }
+                        return;
+                    case 2:
+                        if (coffeeMachines.getWater() >= 350 && coffeeMachines.getMilk() >= 75 && coffeeMachines.getCoffeeBeans() >= 20) {
+                            int waterInMachine = coffeeMachines.water -= 350;
+                            int milkInMachine = coffeeMachines.milk -= 75;
+                            int
+
+                        }
+                }
+            }
+
+        }
+    }
+
+    public static void main(String[] args) {
+
+
+    }
 }

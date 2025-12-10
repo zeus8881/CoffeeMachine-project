@@ -125,12 +125,45 @@ class CoffeeMachines {
                         if (coffeeMachines.getWater() >= 350 && coffeeMachines.getMilk() >= 75 && coffeeMachines.getCoffeeBeans() >= 20) {
                             int waterInMachine = coffeeMachines.water -= 350;
                             int milkInMachine = coffeeMachines.milk -= 75;
-                            int
-
+                            int coffeeBeans = coffeeMachines.coffeeBeans -= 20;
+                            int plasticCups = coffeeMachines.plasticCups -= 1;
+                            double money = coffeeMachines.money += 7.0;
+                            getStateCoffeeMachines(waterInMachine, milkInMachine, coffeeBeans, plasticCups, money);
                         }
+                        return;
+
+                    case 3:
+                        if (coffeeMachines.getWater() >= 200 && coffeeMachines.getMilk() >= 100 && coffeeMachines.getCoffeeBeans() >= 12) {
+                            int waterInMachine = coffeeMachines.water -= 200;
+                            int milkInMachine = coffeeMachines.milk -= 100;
+                            int coffeeBeans = coffeeMachines.coffeeBeans -= 12;
+                            int plasticCups = coffeeMachines.plasticCups -= 1;
+                            double money = coffeeMachines.money += 6.0;
+                            getStateCoffeeMachines(waterInMachine, milkInMachine, coffeeBeans, plasticCups, money);
+                        }
+                        return;
                 }
             }
-
+            case "fill" -> {
+                System.out.println("Write how many ml of water you want to add: ");
+                int ml = sc.nextInt();
+                System.out.println("Write how many ml of milk you want to add: ");
+                int milk = sc.nextInt();
+                System.out.println("Write how many grams of coffee beans you want to add: ");
+                int coffeeBeans = sc.nextInt();
+                System.out.println("Write how many disposable cups you want to add: ");
+                int plasticCups = sc.nextInt();
+                this.water += ml;
+                this.milk += milk;
+                this.coffeeBeans += coffeeBeans;
+                this.plasticCups += plasticCups;
+                getStateCoffeeMachines(ml, milk, coffeeBeans, plasticCups, this.money);
+            }
+            case "take" -> {
+                System.out.println("I gave you $" + money);
+                money = 0;
+                getStateCoffeeMachines(water, milk, coffeeBeans, plasticCups, money);
+            }
         }
     }
 

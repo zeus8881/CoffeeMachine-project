@@ -31,10 +31,12 @@ subprojects {
     dependencies {
         testImplementation 'com.github.hyperskill:hs-test:release-SNAPSHOT'
 
-        compileOnly 'org.projectlombok:lombok:1.18.30'
+        // ===== Добавляем Lombok =====
+        compileOnly 'org.projectlombok:lombok:1.18.30' // для компиляции без включения в артефакт
         annotationProcessor 'org.projectlombok:lombok:1.18.30'
         testCompileOnly 'org.projectlombok:lombok:1.18.30'
         testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+        // ============================
     }
 
     configurations.all {
@@ -61,6 +63,7 @@ project(':util') {
     dependencies {
         implementation 'com.github.hyperskill:hs-test:release-SNAPSHOT'
 
+        // Lombok для util тоже можно добавить
         compileOnly 'org.projectlombok:lombok:1.18.30'
         annotationProcessor 'org.projectlombok:lombok:1.18.30'
     }
